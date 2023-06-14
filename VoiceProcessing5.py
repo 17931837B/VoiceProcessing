@@ -84,7 +84,7 @@ FV22=np.array(featureValue) #ファイル(100)*frame*dimension(15)
 
 
 #累積距離正規化関数(斜め遷移2倍、整合窓(r=3)で実装)
-def g_distance_r3(listA,listB,x,y,r):
+def g_distanceR(listA,listB,x,y,r):
   def d_distance(listA,listB,x,y,i,j):
     square_sum = 0
     for k in range(15):
@@ -114,7 +114,7 @@ matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance_r3(FV11,FV12,x,y,r)
+    T[y]= g_distanceR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
@@ -133,7 +133,7 @@ matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance_r3(FV11,FV12,x,y,r)
+    T[y]= g_distanceR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
@@ -154,7 +154,7 @@ matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance_r3(FV11,FV12,x,y,r)
+    T[y]= g_distanceR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
@@ -174,7 +174,7 @@ matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance_r3(FV11,FV12,x,y,r)
+    T[y]= g_distanceR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
