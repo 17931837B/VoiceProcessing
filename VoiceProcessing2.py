@@ -85,8 +85,8 @@ FV22=np.array(featureValue) #ファイル(100)*frame*dimension(15)
 
 
 #バックトラック
-def g_distance_plt(list_a,list_b,x,y):
-  def d_distance(list_a,list_b,x,y,i,j):
+def distanceGP(list_a,list_b,x,y):
+  def distanceD(list_a,list_b,x,y,i,j):
     square_sum = 0
     for k in range(15):
       square_sum += (list_a[x][i][k] - list_b[y][j][k]) ** 2
@@ -99,26 +99,26 @@ def g_distance_plt(list_a,list_b,x,y):
   p = I-1
   q = J-1
   g = np.zeros((J,I),dtype=float)
-  g[0][0] = d_distance(list_a,list_b,x,y,0,0) #初期条件
+  g[0][0] = distanceD(list_a,list_b,x,y,0,0) #初期条件
   for i in range(1,I): #境界条件1
-    g[0][i] = g[0][i-1] + d_distance(list_a,list_b,x,y,i,0)
+    g[0][i] = g[0][i-1] + distanceD(list_a,list_b,x,y,i,0)
   for j in range(1,J): #境界条件2
-    g[j][0] = g[j-1][0] + d_distance(list_a,list_b,x,y,0,j)
+    g[j][0] = g[j-1][0] + distanceD(list_a,list_b,x,y,0,j)
   for i in range(1,I):
     for j in range(1,J):
-      g[j][i] = min(g[j][i-1]+d_distance(list_a,list_b,x,y,i,j), g[j-1][i-1]+2*d_distance(list_a,list_b,x,y,i,j), g[j-1][i]+d_distance(list_a,list_b,x,y,i,j))
+      g[j][i] = min(g[j][i-1]+distanceD(list_a,list_b,x,y,i,j), g[j-1][i-1]+2*distanceD(list_a,list_b,x,y,i,j), g[j-1][i]+distanceD(list_a,list_b,x,y,i,j))
 
   while p>0 or q>0:
-    if g[q][p] ==  g[q][p-1]+d_distance(list_a,list_b,x,y,p,q):
+    if g[q][p] ==  g[q][p-1]+distanceD(list_a,list_b,x,y,p,q):
       s.append(p-1)
       t.append(q)
       p -= 1
-    elif g[q][p] == g[q-1][p-1]+2*d_distance(list_a,list_b,x,y,p,q):
+    elif g[q][p] == g[q-1][p-1]+2*distanceD(list_a,list_b,x,y,p,q):
       s.append(p-1)
       t.append(q-1)
       p -= 1
       q -= 1 
-    elif g[q][p] == g[q-1][p]+d_distance(list_a,list_b,x,y,p,q):
+    elif g[q][p] == g[q-1][p]+distanceD(list_a,list_b,x,y,p,q):
       s.append(p)
       t.append(q-1)
       q -= 1
@@ -130,7 +130,7 @@ fig = plt.figure()
 ax1 = Axes3D(fig)
 
 for y in range(100):
-  X,Y = g_distance_plt(FV11,FV12,0,y)
+  X,Y = distanceGP(FV11,FV12,0,y)
   Z = y
   
   ax1.plot(X,Y,Z,mew=0.5)
@@ -144,7 +144,7 @@ fig = plt.figure()
 ax1 = Axes3D(fig)
 
 for y in range(100):
-  X,Y = g_distance_plt(FV11,FV21,0,y)
+  X,Y = distanceGP(FV11,FV21,0,y)
   Z = y
   
   ax1.plot(X,Y,Z,mew=0.5)
