@@ -83,8 +83,8 @@ FV22=np.array(featureValue) #ファイル(100)*frame*dimension(15)
 
 
 #累積距離正規化関数(斜め遷移√2倍)
-def g_distance3(listA,listB,x,y):
-  def d_distance(listA,listB,x,y,i,j):
+def distanceG3(listA,listB,x,y):
+  def distanceD(listA,listB,x,y,i,j):
     square_sum = 0
     for k in range(15):
       square_sum += (listA[x][i][k] - listB[y][j][k]) ** 2
@@ -92,14 +92,14 @@ def g_distance3(listA,listB,x,y):
   I = len(listA[x])
   J = len(listB[y])
   g = np.zeros((J,I),dtype=float)
-  g[0][0] = d_distance(listA,listB,x,y,0,0) #初期条件
+  g[0][0] = distanceD(listA,listB,x,y,0,0) #初期条件
   for i in range(1,I): #境界条件1
-    g[0][i] = g[0][i-1] + d_distance(listA,listB,x,y,i,0)
+    g[0][i] = g[0][i-1] + distanceD(listA,listB,x,y,i,0)
   for j in range(1,J): #境界条件2
-    g[j][0] = g[j-1][0] + d_distance(listA,listB,x,y,0,j)
+    g[j][0] = g[j-1][0] + distanceD(listA,listB,x,y,0,j)
   for i in range(1,I):
     for j in range(1,J):
-      g[j][i] = min(g[j][i-1]+d_distance(listA,listB,x,y,i,j), g[j-1][i-1]+2**0.5*d_distance(listA,listB,x,y,i,j), g[j-1][i]+d_distance(listA,listB,x,y,i,j))
+      g[j][i] = min(g[j][i-1]+distanceD(listA,listB,x,y,i,j), g[j-1][i-1]+2**0.5*distanceD(listA,listB,x,y,i,j), g[j-1][i]+distanceD(listA,listB,x,y,i,j))
   return g[J-1][I-1]/(I+J) 
 
 
@@ -110,7 +110,7 @@ matchA1A2=0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance3(FV11,FV12,x,y)
+    T[y]= distanceG3(FV11,FV12,x,y)
   if np.argmin(T) == x:
     matchA1A2 += 1
 print("単語認識率：",matchA1A2,"%")
@@ -124,7 +124,7 @@ matchB1B2 = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance3(FV21,FV22,x,y)
+    T[y]= distanceG3(FV21,FV22,x,y)
   if np.argmin(T) == x:
     matchB1B2 += 1
 print("単語認識率：",matchB1B2,"%")
@@ -138,7 +138,7 @@ matchA1B1 = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance3(FV11,FV21,x,y)
+    T[y]= distanceG3(FV11,FV21,x,y)
   if np.argmin(T) == x:
     matchA1B1 += 1
 print("単語認識率：",matchA1B1,"%")
@@ -152,7 +152,7 @@ matchA1B2 = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance3(FV11,FV22,x,y)
+    T[y]= distanceG3(FV11,FV22,x,y)
   if np.argmin(T) == x:
     matchA1B2 += 1
 print("単語認識率：",matchA1B2,"%")
@@ -166,7 +166,7 @@ matchA2B1 = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance3(FV12,FV21,x,y)
+    T[y]= distanceG3(FV12,FV21,x,y)
   if np.argmin(T) == x:
     matchA2B1 += 1
 print("単語認識率：",matchA2B1,"%")
@@ -180,7 +180,7 @@ matchA2B2 = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distance3(FV12,FV22,x,y)
+    T[y]= distanceG3(FV12,FV22,x,y)
   if np.argmin(T) == x:
     matchA2B2 += 1
 print("単語認識率：",matchA2B2,"%")
