@@ -84,8 +84,8 @@ FV22=np.array(featureValue) #ファイル(100)*frame*dimension(15)
 
 
 #累積距離正規化関数(斜め遷移2倍、整合窓(r=3)で実装)
-def g_distanceR(listA,listB,x,y,r):
-  def d_distance(listA,listB,x,y,i,j):
+def distanceGR(listA,listB,x,y,r):
+  def distanceD(listA,listB,x,y,i,j):
     square_sum = 0
     for k in range(15):
       square_sum += (listA[x][i][k] - listB[y][j][k]) ** 2
@@ -94,98 +94,93 @@ def g_distanceR(listA,listB,x,y,r):
   I = len(listA[x])
   J = len(listB[y])
   g = 100*np.ones((J,I),dtype=float)
-  g[0][0] = d_distance(listA,listB,x,y,0,0) #初期条件
+  g[0][0] = distanceD(listA,listB,x,y,0,0) #初期条件
   for i in range(1,r): #境界条件1
-    g[0][i] = g[0][i-1] + d_distance(listA,listB,x,y,i,0)
+    g[0][i] = g[0][i-1] + distanceD(listA,listB,x,y,i,0)
   for j in range(1,r): #境界条件2
-    g[j][0] = g[j-1][0] + d_distance(listA,listB,x,y,0,j)
+    g[j][0] = g[j-1][0] + distanceD(listA,listB,x,y,0,j)
   for i in range(1,I):
     for j in range(1,J):
       if abs(J/I*i-j)<=r:
-        g[j][i] = min(g[j][i-1]+d_distance(listA,listB,x,y,i,j), g[j-1][i-1]+2*d_distance(listA,listB,x,y,i,j), g[j-1][i]+d_distance(listA,listB,x,y,i,j))
+        g[j][i] = min(g[j][i-1]+distanceD(listA,listB,x,y,i,j), g[j-1][i-1]+2*distanceD(listA,listB,x,y,i,j), g[j-1][i]+distanceD(listA,listB,x,y,i,j))
   return g[J-1][I-1]/(I+J)
 
 
 #整合窓(r=3)(011,012)
-"""
+
 start = time.time()
 r = 3
 matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distanceR(FV11,FV12,x,y,r)
+    T[y]= distanceGR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
 t = time.time() - start
 
-print("単語認識率：",matchA1A2W)
+print("単語認識率：",matchA1A2W,"%")
 print("実行時間:",t,"秒")
-"""
+
 
 
 #整合窓(r=2)(011,012)
-"""
+
 start = time.time()
 r = 2
 matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distanceR(FV11,FV12,x,y,r)
+    T[y]= distanceGR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
 t = time.time() - start
 
-print("単語認識率：",matchA1A2W)
+print("単語認識率：",matchA1A2W,"%")
 print("実行時間:",t,"秒")
-#単語認識率： 95
+#単語認識率： 95 %
 #実行時間: 38.64344120025635 秒
-"""
+
 
 
 #整合窓(r=1)(011,012)
-"""
+
 start = time.time()
 r = 1
 matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distanceR(FV11,FV12,x,y,r)
+    T[y]= distanceGR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
 t = time.time() - start
 
-print("単語認識率：",matchA1A2W)
+print("単語認識率：",matchA1A2W,"%")
 print("実行時間:",t,"秒")
-#単語認識率： 92
+#単語認識率： 92 %
 #実行時間: 22.75525403022766 秒
-"""
+
 
 #整合窓(r=0)(011,012)
-"""
+
 start = time.time()
 r = 0
 matchA1A2W = 0
 for x in range(100):
   T = np.zeros(100)
   for y in range(100):
-    T[y]= g_distanceR(FV11,FV12,x,y,r)
+    T[y]= distanceGR(FV11,FV12,x,y,r)
   if np.argmin(T) == x:
     matchA1A2W += 1
 
 t = time.time() - start
 
-print("単語認識率：",matchA1A2W)
+print("単語認識率：",matchA1A2W,"%")
 print("実行時間:",t,"秒")
-#単語認識率： 6
+#単語認識率： 6 %
 #実行時間: 6.15238881111145 秒
-"""
-
-
-
-
