@@ -126,7 +126,6 @@ print("実行時間:",t,"秒")
 
 
 #同一話者１ 
-
 matchA1A2=0
 for x in range(100):
   T = np.zeros(100)
@@ -140,7 +139,6 @@ print("単語認識率：",matchA1A2,"%")
 
 
 #同一話者２
-
 matchB1B2 = 0
 for x in range(100):
   T = np.zeros(100)
@@ -154,7 +152,6 @@ print("単語認識率：",matchB1B2,"%")
 
 
 #別話者(011,021)
-
 matchA1B1 = 0
 for x in range(100):
   T = np.zeros(100)
@@ -168,7 +165,6 @@ print("単語認識率：",matchA1B1,"%")
 
 
 #別話者(011,022)
-
 matchA1B2 = 0
 for x in range(100):
   T = np.zeros(100)
@@ -182,7 +178,6 @@ print("単語認識率：",matchA1B2,"%")
 
 
 #別話者(012,021)
-
 matchA2B1 = 0
 for x in range(100):
   T = np.zeros(100)
@@ -196,7 +191,6 @@ print("単語認識率：",matchA2B1,"%")
 
 
 #別話者(012,022)
-
 matchA2B2 = 0
 for x in range(100):
   T = np.zeros(100)
