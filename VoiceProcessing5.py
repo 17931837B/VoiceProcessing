@@ -107,7 +107,6 @@ def distanceGR(listA,listB,x,y,r):
 
 
 #整合窓(r=3)(011,012)
-
 start = time.time()
 r = 3
 matchA1A2W = 0
@@ -126,9 +125,7 @@ print("実行時間:",t,"秒")
 #実行時間: 54.875572681427 秒
 
 
-
 #整合窓(r=2)(011,012)
-
 start = time.time()
 r = 2
 matchA1A2W = 0
@@ -149,7 +146,6 @@ print("実行時間:",t,"秒")
 
 
 #整合窓(r=1)(011,012)
-
 start = time.time()
 r = 1
 matchA1A2W = 0
@@ -169,7 +165,6 @@ print("実行時間:",t,"秒")
 
 
 #整合窓(r=0)(011,012)
-
 start = time.time()
 r = 0
 matchA1A2W = 0
