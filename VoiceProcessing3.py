@@ -82,7 +82,7 @@ f.close()
 FV22=np.array(featureValue) #ファイル(100)*frame*dimension(15)
 
 
-#累積距離正規化関数(斜め遷移等倍)
+#累積距離正規化関数(斜め遷移1倍)
 def distanceG2(listA,listB,x,y):
   def distanceD(listA,listB,x,y,i,j):
     square_sum = 0
