@@ -106,6 +106,44 @@ def distanceGR(listA,listB,x,y,r):
   return g[J-1][I-1]/(I+J)
 
 
+#整合窓(r=5)(011,012)
+start = time.time()
+r = 5
+matchA1A2W = 0
+for x in range(100):
+  T = np.zeros(100)
+  for y in range(100):
+    T[y]= distanceGR(FV11,FV12,x,y,r)
+  if np.argmin(T) == x:
+    matchA1A2W += 1
+
+t = time.time() - start
+
+print("単語認識率：",matchA1A2W,"%")
+print("実行時間:",t,"秒")
+#単語認識率： 98 %
+#実行時間: 82.74494671821594 秒
+
+
+#整合窓(r=4)(011,012)
+start = time.time()
+r = 4
+matchA1A2W = 0
+for x in range(100):
+  T = np.zeros(100)
+  for y in range(100):
+    T[y]= distanceGR(FV11,FV12,x,y,r)
+  if np.argmin(T) == x:
+    matchA1A2W += 1
+
+t = time.time() - start
+
+print("単語認識率：",matchA1A2W,"%")
+print("実行時間:",t,"秒")
+#単語認識率： 96 %
+#実行時間: 68.36167025566101 秒
+
+
 #整合窓(r=3)(011,012)
 start = time.time()
 r = 3
