@@ -1,4 +1,5 @@
 import glob
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -90,7 +91,7 @@ def distanceGP(list_a,list_b,x,y):
     square_sum = 0
     for k in range(15):
       square_sum += (list_a[x][i][k] - list_b[y][j][k]) ** 2
-    return square_sum ** 1/2
+    return math.sqrt(square_sum)
   
   s = []
   t = []
