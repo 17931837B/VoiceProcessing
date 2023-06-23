@@ -1,4 +1,5 @@
 import glob
+import math
 import numpy as np
 
 #city011の読み込み
@@ -88,7 +89,7 @@ def distanceG2(listA,listB,x,y):
     square_sum = 0
     for k in range(15):
       square_sum += (listA[x][i][k] - listB[y][j][k]) ** 2
-    return square_sum ** 1/2
+    return math.sqrt(square_sum)
   I = len(listA[x])
   J = len(listB[y])
   g = np.zeros((J,I),dtype=float)
