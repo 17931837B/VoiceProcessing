@@ -150,7 +150,7 @@ for x in range(100):
   if np.argmin(T) == x:
     matchA1B2 += 1
 print("単語認識率：",matchA1B2,"%")
-#単語認識率： 90 %
+#単語認識率： 92 %
 
 
 #別話者(012,021)
@@ -162,7 +162,7 @@ for x in range(100):
   if np.argmin(T) == x:
     matchA2B1 += 1
 print("単語認識率：",matchA2B1,"%")
-#単語認識率： 94 %
+#単語認識率： 95 %
 
 
 #別話者(012,022)
@@ -174,4 +174,4 @@ for x in range(100):
   if np.argmin(T) == x:
     matchA2B2 += 1
 print("単語認識率：",matchA2B2,"%")
-#単語認識率： 91 %
+#単語認識率： 94 %
