@@ -94,7 +94,7 @@ def distanceGR(listA,listB,x,y,r):
   
   I = len(listA[x])
   J = len(listB[y])
-  g = 100*np.ones((J,I),dtype=float)
+  g = 1000*np.ones((J,I),dtype=float)
   g[0][0] = distanceD(listA,listB,x,y,0,0) #初期条件
   for i in range(1,r): #境界条件1
     g[0][i] = g[0][i-1] + distanceD(listA,listB,x,y,i,0)
